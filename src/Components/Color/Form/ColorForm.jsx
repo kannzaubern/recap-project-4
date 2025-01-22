@@ -5,7 +5,6 @@ export default function ColorForm({ onAddColor }) {
   function handleSubmit(e) {
     e.preventDefault();
     const formData = new FormData(e.target);
-    // console.log("Form Event:", event.target);
     const data = Object.fromEntries(formData); // Only grabbing data/info of the form
     onAddColor(data);
     console.log("Data:", data); // Pass data to parent component

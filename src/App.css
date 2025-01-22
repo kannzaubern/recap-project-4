@@ -2,3 +2,9 @@ body {
   font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   padding: 10px;
 }
+
+.empty-state {
+  padding-left: 10px;
+  color: #e0610c;
+  font-weight: 800;
+}
