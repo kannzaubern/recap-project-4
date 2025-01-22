@@ -1,5 +1,5 @@
-import "./Form.css";
-import ColorInput from "../../ColorInput/ColorInput";
+import "./ColorForm.css";
+import ColorInput from "../ColorInput/ColorInput";
 
 export default function ColorForm({ onAddColor }) {
   function handleSubmit(e) {

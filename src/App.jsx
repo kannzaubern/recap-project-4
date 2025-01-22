@@ -1,6 +1,6 @@
 import { initialColors } from "./lib/colors";
 import Color from "./Components/Color/Color";
-import ColorForm from "./Components/Color/Form/ColorForm";
+import ColorForm from "./Components/Form/ColorForm";
 import { useState } from "react";
 import { nanoid } from "nanoid";
 import "./App.css";
