@@ -3,12 +3,8 @@ import { useState } from "react";
 import ColorForm from "../Form/ColorForm";
 
 export default function Color({ color, onDeleteColor, onEditColor }) {
-  const [confirmationMessage, setConfirmationMessage] = useState("Delete"); // State to handle confirmation message
+  const [confirmationMessage, setConfirmationMessage] = useState(false); // State to handle confirmation message
   const [editMode, setEditMode] = useState(false);
-
-  function handleConfirmation() {
-    setConfirmationMessage("Are you sure?");
-  }
 
   return (
     <div
@@ -41,14 +37,21 @@ export default function Color({ color, onDeleteColor, onEditColor }) {
         </>
       )}
 
-      {/* Delete Button */}
-      <button className="delete-button" onClick={() => handleConfirmation()}>
-        {confirmationMessage}
-      </button>
+      {/* Delete + Confirmation Button */}
+      {confirmationMessage ? (
+        <>
+          <div className="color-card-headline">Are you sure?</div>
+          <button onClick={() => setConfirmationMessage(false)}>CANCEL</button>
 
-      {/* Confirmation Button */}
-      {confirmationMessage == "Are you sure?" && (
-        <button onClick={() => onDeleteColor(color.id)}>Yes</button>
+          {/* When cancel is clicked, onClicking event will trigger the arrow function 
+          and change state to false */}
+          <button onClick={() => onDeleteColor(color.id)}>DELETE</button>
+        </>
+      ) : (
+        <button onClick={() => setConfirmationMessage(true)}>DELETE</button>
+        /* Delete button triggers onclick function, 
+        executes the arrow function, updates/ changes state to true and 
+        jumps to the above condition to be executed.  */
       )}
     </div>
   );
