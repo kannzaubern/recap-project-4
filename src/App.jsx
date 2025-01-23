@@ -46,7 +46,6 @@ function App() {
             onEditColor={(updatedColor) =>
               handleEditColor(color.id, updatedColor)
             }
-            onCopyColor={color.id}
           />
         ))
       )}

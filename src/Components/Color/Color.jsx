@@ -45,19 +45,20 @@ export default function Color({ color, onDeleteColor, onEditColor }) {
 
       {/* Delete + Confirmation Button */}
       {confirmationMessage ? (
+        // If confirmationMessage is true (i.e. user has clicked delete and confirmation is needed)
         <>
           <div className="color-card-headline">Are you sure?</div>
           <button onClick={() => setConfirmationMessage(false)}>CANCEL</button>
-
           {/* When cancel is clicked, onClicking event will trigger the arrow function 
           and change state to false */}
+
           <button onClick={() => onDeleteColor(color.id)}>DELETE</button>
+          {/* When button is clicked, function is called and id of current color is passed. 
+          This triggers parent component's delete function. */}
         </>
       ) : (
+        // If confirmationMessage is false (user hasn't tapped DELETE yet), render DELETE button.
         <button onClick={() => setConfirmationMessage(true)}>DELETE</button>
-        /* Delete button triggers onclick function, 
-        executes the arrow function, updates/ changes state to true and 
-        jumps to the above condition to be executed.  */
       )}
       <button className="edit-button" onClick={() => setEditMode(true)}>
         EDIT
