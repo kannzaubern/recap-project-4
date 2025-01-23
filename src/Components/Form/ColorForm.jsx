@@ -1,12 +1,12 @@
 import "./ColorForm.css";
 import ColorInput from "../ColorInput/ColorInput";
 
-export default function ColorForm({ onAddColor }) {
+export default function ColorForm({ onSubmitColor, buttonText }) {
   function handleSubmit(e) {
     e.preventDefault();
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData); // Only grabbing data/info of the form
-    onAddColor(data);
+    onSubmitColor(data);
     console.log("Data:", data); // Pass data to parent component
     e.target.reset();
   }
@@ -20,7 +20,11 @@ export default function ColorForm({ onAddColor }) {
 
       <label htmlFor="hex">HEX</label>
       <br />
-      <ColorInput name="hex" initialValue="#ffffff" />
+      <ColorInput
+        name="hex"
+        initialValue="#ffffff"
+        onChange={(value) => handleSubmit("hex", value)}
+      />
       <br />
 
       <label htmlFor="contrastText">Contrast Text</label>
@@ -29,7 +33,7 @@ export default function ColorForm({ onAddColor }) {
       <br />
 
       <button type="submit" className="form__button">
-        Add Color
+        {buttonText}
       </button>
     </form>
   );
