@@ -30,35 +30,40 @@ export default function Color({ color, onDeleteColor, onEditColor }) {
       <p>contrast: {color.contrastText}</p>
 
       {/* Edit Mode */}
-      {editMode && (
+      {editMode ? (
         <>
+          {/* Render the edit form */}
           <ColorForm
             onSubmitColor={(updatedColor) => {
               onEditColor(updatedColor); // Only pass the updatedColor, not the id
-              setEditMode(false); // Close edit mode after submitting
+              setEditMode(false);
             }}
             buttonText="CHANGE COLOR"
           />
-          <button onClick={() => setEditMode(false)}>CANCEL</button>
-        </>
-      )}
-
-      {/* Delete + Confirmation Button */}
-      {confirmationMessage ? (
-        <>
-          <div className="color-card-headline">Are you sure?</div>
-          <button onClick={() => setConfirmationMessage(false)}>CANCEL</button>
-
-          <button onClick={() => onDeleteColor(color.id)}>DELETE</button>
-          {/* Triggers parent component's delete function. */}
+          <button onClick={() => setEditMode(false)}>CANCEL</button>{" "}
         </>
       ) : (
-        // If confirmationMessage is false (user hasn't tapped DELETE), render different DELETE button.
-        <button onClick={() => setConfirmationMessage(true)}>DELETE</button>
+        <>
+          {/* Delete + Confirmation Mode */}
+          {confirmationMessage ? (
+            <>
+              <div className="color-card-headline">Are you sure?</div>
+              <button onClick={() => setConfirmationMessage(false)}>
+                CANCEL
+              </button>
+
+              <button onClick={() => onDeleteColor(color.id)}>DELETE</button>
+              {/* Triggers parent component's delete function. */}
+            </>
+          ) : (
+            // If confirmationMessage is false (user hasn't tapped DELETE), render different DELETE button.
+            <button onClick={() => setConfirmationMessage(true)}>DELETE</button>
+          )}
+          <button className="edit-button" onClick={() => setEditMode(true)}>
+            EDIT
+          </button>
+        </>
       )}
-      <button className="edit-button" onClick={() => setEditMode(true)}>
-        EDIT
-      </button>
     </div>
   );
 }
