@@ -23,18 +23,18 @@ function App() {
   }
 
   function handleEditColor(id, updatedColor) {
-    const updatedColors = colors.map((color) =>
+    const newColors = colors.map((color) =>
       color.id === id ? { ...color, ...updatedColor } : color
     );
-    setColors(updatedColors);
-    console.log("Updated Colors:", updatedColors);
+    setColors(newColors);
+    console.log("Updated Colors:", newColors);
   }
 
   return (
     <>
       <h1>Theme Creator</h1>
       <ColorForm onSubmitColor={handleAddingColor} buttonText="ADD COLOR" />
-
+      {/* By passing the function as a prop, child can notify parent when color has been added. */}
       {colors.length === 0 ? (
         <p className="empty-state">No colors ... start by adding some!</p>
       ) : (

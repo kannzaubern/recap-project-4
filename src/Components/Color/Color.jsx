@@ -9,7 +9,7 @@ export default function Color({ color, onDeleteColor, onEditColor }) {
 
   async function handleCopyColor() {
     const hexColor = color.hex;
-    await navigator.clipboard.writeText(hexColor);
+    await navigator.clipboard.writeText(hexColor); // writeText method of clipboard API returns a promise; function pauses execution until promise resolves
     console.log("Console color:", color.hex);
     setButtonText("COPIED SUCCESSFULLY");
   }
@@ -37,7 +37,7 @@ export default function Color({ color, onDeleteColor, onEditColor }) {
               onEditColor(updatedColor); // Only pass the updatedColor, not the id
               setEditMode(false); // Close edit mode after submitting
             }}
-            buttonText="Change Color"
+            buttonText="CHANGE COLOR"
           />
           <button onClick={() => setEditMode(false)}>CANCEL</button>
         </>
@@ -45,19 +45,15 @@ export default function Color({ color, onDeleteColor, onEditColor }) {
 
       {/* Delete + Confirmation Button */}
       {confirmationMessage ? (
-        // If confirmationMessage is true (i.e. user has clicked delete and confirmation is needed)
         <>
           <div className="color-card-headline">Are you sure?</div>
           <button onClick={() => setConfirmationMessage(false)}>CANCEL</button>
-          {/* When cancel is clicked, onClicking event will trigger the arrow function 
-          and change state to false */}
 
           <button onClick={() => onDeleteColor(color.id)}>DELETE</button>
-          {/* When button is clicked, function is called and id of current color is passed. 
-          This triggers parent component's delete function. */}
+          {/* Triggers parent component's delete function. */}
         </>
       ) : (
-        // If confirmationMessage is false (user hasn't tapped DELETE yet), render DELETE button.
+        // If confirmationMessage is false (user hasn't tapped DELETE), render different DELETE button.
         <button onClick={() => setConfirmationMessage(true)}>DELETE</button>
       )}
       <button className="edit-button" onClick={() => setEditMode(true)}>
