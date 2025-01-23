@@ -5,6 +5,14 @@ import ColorForm from "../Form/ColorForm";
 export default function Color({ color, onDeleteColor, onEditColor }) {
   const [confirmationMessage, setConfirmationMessage] = useState(false); // State to handle confirmation message
   const [editMode, setEditMode] = useState(false);
+  const [buttonText, setButtonText] = useState("COPY");
+
+  async function handleCopyColor() {
+    const hexColor = color.hex;
+    await navigator.clipboard.writeText(hexColor);
+    console.log("Console color:", color.hex);
+    setButtonText("COPIED SUCCESSFULLY");
+  }
 
   return (
     <div
@@ -14,12 +22,10 @@ export default function Color({ color, onDeleteColor, onEditColor }) {
         color: color.contrastText,
       }}
     >
-      <section>
-        <h3 className="color-card-headline">{color.hex}</h3>
-        <button className="edit-button" onClick={() => setEditMode(true)}>
-          Edit
-        </button>
-      </section>
+      <h3 className="color-card-headline">{color.hex}</h3>
+      <button className="button-copy" onClick={() => handleCopyColor(color.id)}>
+        {buttonText}
+      </button>
       <h4>{color.role}</h4>
       <p>contrast: {color.contrastText}</p>
 
@@ -33,7 +39,7 @@ export default function Color({ color, onDeleteColor, onEditColor }) {
             }}
             buttonText="Change Color"
           />
-          <button onClick={() => setEditMode(false)}>Cancel</button>
+          <button onClick={() => setEditMode(false)}>CANCEL</button>
         </>
       )}
 
@@ -53,6 +59,9 @@ export default function Color({ color, onDeleteColor, onEditColor }) {
         executes the arrow function, updates/ changes state to true and 
         jumps to the above condition to be executed.  */
       )}
+      <button className="edit-button" onClick={() => setEditMode(true)}>
+        EDIT
+      </button>
     </div>
   );
 }
