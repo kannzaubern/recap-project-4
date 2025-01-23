@@ -33,7 +33,7 @@ function App() {
   return (
     <>
       <h1>Theme Creator</h1>
-      <ColorForm onSubmitColor={handleAddingColor} buttonText="Add Color" />
+      <ColorForm onSubmitColor={handleAddingColor} buttonText="ADD COLOR" />
 
       {colors.length === 0 ? (
         <p className="empty-state">No colors ... start by adding some!</p>
@@ -46,6 +46,7 @@ function App() {
             onEditColor={(updatedColor) =>
               handleEditColor(color.id, updatedColor)
             }
+            onCopyColor={color.id}
           />
         ))
       )}
