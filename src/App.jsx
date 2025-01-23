@@ -9,7 +9,7 @@ function App() {
   const [colors, setColors] = useState(initialColors); // Initializing colors array using initial colors
 
   function handleAddingColor(newColor) {
-    setColors([...colors, { id: nanoid(), ...newColor }]); // Creates a new object with a unique ID
+    setColors([{ id: nanoid(), ...newColor }, ...colors]); // Creates a new object with a unique ID, adds newColor to the beginning of the array
   }
 
   function handleDeleteColor(id) {
@@ -18,10 +18,18 @@ function App() {
     setColors(newColors);
   }
 
+  function handleEditColor(id, updatedColor) {
+    const updatedColors = colors.map((color) =>
+      color.id === id ? { ...color, ...updatedColor } : color
+    );
+    setColors(updatedColors);
+    console.log("Updated Colors:", updatedColors);
+  }
+
   return (
     <>
       <h1>Theme Creator</h1>
-      <ColorForm onAddColor={handleAddingColor} />
+      <ColorForm onSubmitColor={handleAddingColor} buttonText="Add Color" />
 
       {colors.length === 0 ? (
         <p className="empty-state">No colors ... start by adding some!</p>
@@ -31,6 +39,9 @@ function App() {
             key={color.id}
             color={color}
             onDeleteColor={handleDeleteColor}
+            onEditColor={(updatedColor) =>
+              handleEditColor(color.id, updatedColor)
+            }
           />
         ))
       )}

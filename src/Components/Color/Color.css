@@ -5,7 +5,12 @@
 
 .color-card-headline {
   display: inline;
-  padding: 2px 6px;
+  padding: 6px 6px;
+  margin-right: 4px;
   background: black;
   color: white;
+}
+
+.button-edit {
+  height: 26px;
 }
