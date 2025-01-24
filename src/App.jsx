@@ -23,6 +23,7 @@ function App() {
   }
 
   function handleEditColor(id, updatedColor) {
+    console.log(typeof updatedColor);
     const newColors = colors.map((color) =>
       color.id === id ? { ...color, ...updatedColor } : color
     );
