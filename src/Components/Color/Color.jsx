@@ -34,6 +34,7 @@ export default function Color({ color, onDeleteColor, onEditColor }) {
         <>
           {/* Render the edit form */}
           <ColorForm
+            colorValues={color}
             onSubmitColor={(updatedColor) => {
               onEditColor(updatedColor); // Only pass the updatedColor, not the id
               setEditMode(false);

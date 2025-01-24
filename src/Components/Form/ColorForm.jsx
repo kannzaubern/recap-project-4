@@ -1,7 +1,15 @@
 import "./ColorForm.css";
 import ColorInput from "../ColorInput/ColorInput";
 
-export default function ColorForm({ onSubmitColor, buttonText }) {
+export default function ColorForm({
+  onSubmitColor,
+  buttonText,
+  colorValues = {
+    role: "secondary light",
+    hex: "#9FA8DA",
+    contrastText: "#000000",
+  },
+}) {
   function handleSubmit(e) {
     e.preventDefault(); // Prevents page from reloading when form is submitted
     const formData = new FormData(e.target); // Grabs data from form fields
@@ -15,17 +23,17 @@ export default function ColorForm({ onSubmitColor, buttonText }) {
     <form className="color-form" onSubmit={handleSubmit}>
       <label htmlFor="role">Role</label>
       <br />
-      <input type="text" id="role" name="role" placeholder="some role" />
+      <input type="text" id="role" name="role" placeholder={colorValues.role} />
       <br />
 
       <label htmlFor="hex">HEX</label>
       <br />
-      <ColorInput name="hex" initialValue="#ffffff" />
+      <ColorInput name="hex" initialValue={colorValues.hex} />
       <br />
 
       <label htmlFor="contrastText">Contrast Text</label>
       <br />
-      <ColorInput name="contrastText" initialValue="#000000" />
+      <ColorInput name="contrastText" initialValue={colorValues.contrastText} />
       <br />
 
       <button type="submit" className="form__button">
